@@ -142,6 +142,34 @@
   button:active{transform:translateY(5px);box-shadow:0 0 0 #C9587A}
   button[disabled]{opacity:.65;cursor:wait;transform:none;box-shadow:0 5px 0 #C9587A}
 
+  .direct{text-align:center;margin-top:1.4rem}
+  .or{
+    display:flex;align-items:center;gap:.75rem;
+    margin:0 0 1.1rem;
+    font-size:.9rem;
+    color:var(--rose);
+    opacity:.75;
+  }
+  .or::before,.or::after{
+    content:"";flex:1;
+    border-top:2px dashed var(--petal);
+  }
+  .mailbtn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-family:"Baloo 2",sans-serif;
+    font-size:1rem;font-weight:500;
+    color:var(--rose);
+    text-decoration:none;
+    background:var(--cream);
+    border:2px solid var(--petal);
+    border-radius:999px;
+    padding:.5rem 1.2rem;
+    transition:background .15s,border-color .15s;
+  }
+  .mailbtn:hover{background:var(--blush);border-color:var(--rose)}
+  .mailbtn:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+  .mailbtn svg{width:19px;height:19px;flex:none}
+
   #status{margin:.9rem 0 0;font-size:.95rem;min-height:1.4rem;text-align:center}
 
   .thanks{text-align:center;padding:1.5rem .5rem}
@@ -235,6 +263,18 @@
       </svg>
       <h2>Tucked away safely</h2>
       <p>Thank you for writing to her.</p>
+    </div>
+
+    <div class="direct">
+      <p class="or"><span>or</span></p>
+      <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4.5" width="20" height="15" rx="3"/>
+          <path d="M2.8 6.2 12 13l9.2-6.8"/>
+        </svg>
+        Send a direct email
+      </a>
     </div>
   </div>
 
