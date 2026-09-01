@@ -80,6 +80,22 @@
   .d3{top:2%;right:16%;width:20px;animation:drift 8s ease-in-out infinite .8s}
   @keyframes drift{50%{transform:translateY(-12px) rotate(-10deg)}}
 
+
+
+  /* ---------- age ribbon ---------- */
+  .clock{
+    display:inline-flex;align-items:center;gap:.55rem;flex-wrap:wrap;
+    justify-content:center;
+    margin:-1.5rem auto 2.1rem;
+    padding:.4rem 1.1rem;
+    background:var(--cream);
+    border:2px dashed var(--petal);
+    border-radius:999px;
+    font-size:.86rem;
+  }
+  .clock b{font-family:"Baloo 2",sans-serif;font-weight:700;color:var(--rose)}
+  .clock .dot{color:var(--petal);font-size:.8rem}
+
   /* ---------- note card ---------- */
   .card{
     position:relative;
@@ -178,6 +194,12 @@
     </div>
     <h1>Notes for Noor</h1>
     <p>She is too little to read these yet. Leave one anyway — she will have them all one day.</p>
+
+    <p class="clock">
+      <span id="age"></span>
+      <span class="dot">&hearts;</span>
+      <span id="bday"></span>
+    </p>
   </section>
 
   <div class="card">
@@ -220,6 +242,41 @@
 </main>
 
 <script>
+/* ---- how long Noor has been here ---- */
+(function () {
+  const BORN = new Date(2026, 4, 20);          // 20 May 2026
+  const today = new Date(); today.setHours(0,0,0,0);
+  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+
+  // years / months / days lived
+  let y = today.getFullYear() - BORN.getFullYear();
+  let m = today.getMonth() - BORN.getMonth();
+  let d = today.getDate() - BORN.getDate();
+  if (d < 0) { m--; d += new Date(today.getFullYear(), today.getMonth(), 0).getDate(); }
+  if (m < 0) { y--; m += 12; }
+
+  const parts = [];
+  if (y) parts.push(plural(y, 'year'));
+  if (m) parts.push(plural(m, 'month'));
+  if (d || !parts.length) parts.push(plural(d, 'day'));
+  const lived = parts.length > 1
+    ? parts.slice(0, -1).join(', ') + ' and ' + parts.at(-1)
+    : parts[0];
+
+  // next birthday
+  let next = new Date(today.getFullYear(), 4, 20);
+  if (next < today) next = new Date(today.getFullYear() + 1, 4, 20);
+  const sleeps = Math.round((next - today) / 86400000);
+  const turning = next.getFullYear() - BORN.getFullYear();
+  const ord = n => n + (['th','st','nd','rd'][(n % 100 - 20) % 10] || ['th','st','nd','rd'][n % 100] || 'th');
+
+  document.getElementById('age').innerHTML = `<b>${lived}</b> in the world`;
+  document.getElementById('bday').innerHTML =
+    sleeps !== 0 ? `<b>${plural(sleeps, 'day')}</b> to her ${ord(turning)} birthday`
+    : turning === 0 ? `she arrived <b>today</b>`
+    : `it is her <b>${ord(turning)} birthday</b> today`;
+})();
+
 const form   = document.getElementById('noteForm');
 const status = document.getElementById('status');
 const btn    = form.querySelector('button');
