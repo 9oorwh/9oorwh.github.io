@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes for Noor</title>
+<meta name="description" content="Leave a little note for Noor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blush:#FFF2F5;
+    --petal:#FBD3DE;
+    --rose:#E56D8E;
+    --deep:#4E2C3C;
+    --cream:#FFFDFC;
+    --butter:#FFE6A8;
+  }
+  *{box-sizing:border-box}
+
+  body{
+    margin:0;
+    color:var(--deep);
+    font-family:"Nunito",system-ui,sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    padding:5vh 20px 3rem;
+    display:flex;
+    justify-content:center;
+    background:
+      radial-gradient(circle at 12% 8%, #FFE3EC 0%, transparent 42%),
+      radial-gradient(circle at 88% 4%, #E7F3EF 0%, transparent 38%),
+      radial-gradient(circle at 80% 92%, #FFF0D6 0%, transparent 40%),
+      var(--blush);
+  }
+  main{width:100%;max-width:33rem;position:relative}
+
+  /* ---------- hero ---------- */
+  .hero{text-align:center;position:relative}
+
+  .photo{
+    position:relative;
+    width:min(230px,58vw);
+    margin:0 auto 1.25rem;
+    aspect-ratio:1;
+    animation:bob 6s ease-in-out infinite;
+  }
+  .photo img{
+    width:100%;height:100%;
+    object-fit:cover;
+    display:block;
+    clip-path:url(#flower);
+  }
+  .photo::before{                 /* petal edge behind the flower */
+    content:"";
+    position:absolute;
+    inset:-7px;
+    background:var(--petal);
+    clip-path:url(#flower);
+    z-index:-1;
+  }
+  @keyframes bob{50%{transform:translateY(-9px) rotate(1.5deg)}}
+
+  h1{
+    font-family:"Baloo 2",system-ui,sans-serif;
+    font-weight:700;
+    font-size:clamp(2.5rem,11vw,3.8rem);
+    line-height:1;
+    letter-spacing:-.5px;
+    margin:0 0 .5rem;
+    color:var(--rose);
+  }
+  .hero p{margin:0 auto 2.25rem;max-width:25rem}
+
+  /* floating doodles */
+  .doodle{position:absolute;pointer-events:none;opacity:.85}
+  .d1{top:6%;left:-4%;width:34px;animation:drift 7s ease-in-out infinite}
+  .d2{top:26%;right:-3%;width:26px;animation:drift 9s ease-in-out infinite reverse}
+  .d3{top:2%;right:16%;width:20px;animation:drift 8s ease-in-out infinite .8s}
+  @keyframes drift{50%{transform:translateY(-12px) rotate(-10deg)}}
+
+  /* ---------- note card ---------- */
+  .card{
+    position:relative;
+    background:var(--cream);
+    border:2px solid var(--petal);
+    border-radius:38px 38px 38px 10px;   /* speech bubble */
+    padding:2rem 1.6rem 1.7rem;
+    box-shadow:0 14px 34px rgba(229,109,142,.16);
+  }
+  .tape{                                 /* washi tape */
+    position:absolute;
+    top:-14px;left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    background:var(--butter);
+    font-family:"Baloo 2",sans-serif;
+    font-weight:500;
+    font-size:.9rem;
+    padding:.15rem 1.4rem;
+    border-radius:4px;
+    box-shadow:0 2px 6px rgba(0,0,0,.06);
+  }
+
+  label{display:block;font-weight:700;font-size:.95rem;margin:0 0 .35rem}
+  .field{margin-bottom:1.15rem}
+  input,textarea{
+    width:100%;
+    font:inherit;color:inherit;
+    padding:.75rem .9rem;
+    background:var(--blush);
+    border:2px solid transparent;
+    border-radius:16px;
+    transition:border-color .15s;
+  }
+  input::placeholder,textarea::placeholder{color:#B7909E}
+  input:hover,textarea:hover{border-color:var(--petal)}
+  textarea{min-height:8rem;resize:vertical;line-height:1.65}
+  input:focus,textarea:focus,button:focus-visible{
+    outline:3px solid var(--rose);outline-offset:2px;border-color:transparent;
+  }
+  .hp{position:absolute;left:-9999px}
+
+  button{
+    width:100%;
+    font-family:"Baloo 2",sans-serif;
+    font-size:1.15rem;font-weight:700;
+    color:var(--cream);
+    background:var(--rose);
+    border:none;border-radius:999px;
+    padding:.75rem;
+    cursor:pointer;
+    box-shadow:0 5px 0 #C9587A;
+    transition:transform .1s,box-shadow .1s;
+  }
+  button:hover{transform:translateY(2px);box-shadow:0 3px 0 #C9587A}
+  button:active{transform:translateY(5px);box-shadow:0 0 0 #C9587A}
+  button[disabled]{opacity:.65;cursor:wait;transform:none;box-shadow:0 5px 0 #C9587A}
+
+  #status{margin:.9rem 0 0;font-size:.95rem;min-height:1.4rem;text-align:center}
+
+  .thanks{text-align:center;padding:1.5rem .5rem}
+  .thanks svg{width:54px;margin-bottom:.4rem}
+  .thanks h2{font-family:"Baloo 2",sans-serif;color:var(--rose);margin:.2rem 0 .3rem;font-size:1.6rem}
+  .thanks p{margin:0}
+  [hidden]{display:none}
+
+  footer{text-align:center;font-size:.85rem;opacity:.65;margin-top:2rem}
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- flower mask used by the photo -->
+<svg width="0" height="0" aria-hidden="true">
+  <defs>
+    <clipPath id="flower" clipPathUnits="objectBoundingBox">
+      <circle cx=".5"   cy=".5"   r=".34"/>
+      <circle cx=".81"  cy=".5"   r=".19"/>
+      <circle cx=".719" cy=".719" r=".19"/>
+      <circle cx=".5"   cy=".81"  r=".19"/>
+      <circle cx=".281" cy=".719" r=".19"/>
+      <circle cx=".19"  cy=".5"   r=".19"/>
+      <circle cx=".281" cy=".281" r=".19"/>
+      <circle cx=".5"   cy=".19"  r=".19"/>
+      <circle cx=".719" cy=".281" r=".19"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<main>
+
+  <svg class="doodle d1" viewBox="0 0 24 24" fill="#FBD3DE" aria-hidden="true">
+    <path d="M12 21S3 14.5 3 8.9A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 9 1.9C21 14.5 12 21 12 21z"/>
+  </svg>
+  <svg class="doodle d2" viewBox="0 0 24 24" fill="#BFE3D8" aria-hidden="true">
+    <path d="M12 1l2.6 7.4L22 11l-7.4 2.6L12 21l-2.6-7.4L2 11l7.4-2.6z"/>
+  </svg>
+  <svg class="doodle d3" viewBox="0 0 24 24" fill="#FFE6A8" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/>
+  </svg>
+
+  <section class="hero">
+    <div class="photo">
+      <img src="image.jpg" alt="Noor as a baby">
+    </div>
+    <h1>Notes for Noor</h1>
+    <p>She is too little to read these yet. Write one anyway — she will have them one day.</p>
+  </section>
+
+  <div class="card">
+    <span class="tape">for later</span>
+
+    <form id="noteForm">
+      <input type="hidden" name="access_key" value="e8de582f-62aa-45c2-b3e8-5da425e961a8">
+      <input type="hidden" name="subject" value="A new note for Noor">
+      <input type="hidden" name="from_name" value="Notes for Noor">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+      <div class="field">
+        <label for="name">Your name</label>
+        <input id="name" type="text" name="name" placeholder="Who is writing?" required>
+      </div>
+
+      <div class="field">
+        <label for="email">Your email</label>
+        <input id="email" type="email" name="email" placeholder="you@email.com" required>
+      </div>
+
+      <div class="field">
+        <label for="message">Your note</label>
+        <textarea id="message" name="message" required
+          placeholder="A wish, a memory, some advice for later..."></textarea>
+      </div>
+
+      <button type="submit">Send your note</button>
+      <p id="status" role="status"></p>
+    </form>
+
+    <div class="thanks" id="thanks" hidden>
+      <svg viewBox="0 0 24 24" fill="#E56D8E" aria-hidden="true">
+        <path d="M12 21S3 14.5 3 8.9A4.4 4.4 0 0 1 12 7a4.4 4.4 0 0 1 9 1.9C21 14.5 12 21 12 21z"/>
+      </svg>
+      <h2>Tucked away safely</h2>
+      <p>Thank you for writing to her.</p>
+    </div>
+  </div>
+
+  <footer>Kept for Noor, with love.</footer>
+</main>
+
+<script>
+const form   = document.getElementById('noteForm');
+const status = document.getElementById('status');
+const btn    = form.querySelector('button');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  btn.disabled = true;
+  status.textContent = 'Sending...';
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    });
+    const data = await res.json();
+
+    if (data.success) {
+      form.hidden = true;
+      document.getElementById('thanks').hidden = false;
+    } else {
+      status.textContent = 'That did not send. Please try again.';
+      btn.disabled = false;
+    }
+  } catch {
+    status.textContent = 'No connection. Check your internet and try again.';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
