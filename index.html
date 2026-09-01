@@ -142,18 +142,29 @@
   button:active{transform:translateY(5px);box-shadow:0 0 0 #C9587A}
   button[disabled]{opacity:.65;cursor:wait;transform:none;box-shadow:0 5px 0 #C9587A}
 
-  .direct{text-align:center;margin-top:1.4rem}
-  .or{
-    display:flex;align-items:center;gap:.75rem;
-    margin:0 0 1.1rem;
-    font-size:.9rem;
+  /* share-a-moment card */
+  .share{
+    text-align:center;
+    border-radius:38px 10px 38px 38px;   /* mirrored bubble */
+  }
+  .share h2{
+    font-family:"Baloo 2",sans-serif;
+    font-size:1.45rem;font-weight:700;
     color:var(--rose);
-    opacity:.75;
+    margin:0 0 .4rem;
   }
-  .or::before,.or::after{
-    content:"";flex:1;
-    border-top:2px dashed var(--petal);
+  .share p{margin:0 auto 1.25rem;max-width:24rem;font-size:.96rem}
+
+  /* or divider between the two cards */
+  .or{
+    display:flex;align-items:center;gap:.9rem;
+    margin:1.5rem 0;
+    font-family:"Baloo 2",sans-serif;
+    font-size:1rem;
+    color:var(--rose);
+    opacity:.8;
   }
+  .or::before,.or::after{content:"";flex:1;border-top:2px dashed var(--petal)}
   .mailbtn{
     display:inline-flex;align-items:center;gap:.5rem;
     font-family:"Baloo 2",sans-serif;
@@ -265,9 +276,15 @@
       <p>Thank you for writing to her.</p>
     </div>
 
-    <div class="direct">
-      <p class="or"><span>or</span></p>
-      <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
+  </div>
+
+
+  <p class="or">or</p>
+
+  <div class="card share">
+    <h2>Share a moment</h2>
+    <p>Photos, videos, a voice message, a story about the day you met her &mdash; anything you would like her to keep.</p>
+    <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="4.5" width="20" height="15" rx="3"/>
@@ -275,8 +292,8 @@
         </svg>
         Send a direct email
       </a>
-    </div>
   </div>
+
 
   <footer>Saved for Noor, with love.</footer>
 </main>
