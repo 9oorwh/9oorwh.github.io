@@ -89,18 +89,6 @@
     padding:2rem 1.6rem 1.7rem;
     box-shadow:0 14px 34px rgba(229,109,142,.16);
   }
-  .tape{                                 /* washi tape */
-    position:absolute;
-    top:-14px;left:50%;
-    transform:translateX(-50%) rotate(-2deg);
-    background:var(--butter);
-    font-family:"Baloo 2",sans-serif;
-    font-weight:500;
-    font-size:.9rem;
-    padding:.15rem 1.4rem;
-    border-radius:4px;
-    box-shadow:0 2px 6px rgba(0,0,0,.06);
-  }
 
   label{display:block;font-weight:700;font-size:.95rem;margin:0 0 .35rem}
   .field{margin-bottom:1.15rem}
@@ -188,15 +176,13 @@
       <img src="image.jpg" alt="Noor as a baby">
     </div>
     <h1>Notes for Noor</h1>
-    <p>She is too little to read these yet. Write one anyway — she will have them one day.</p>
+    <p>She is too little to read these yet. Leave one anyway — she will have them all one day.</p>
   </section>
 
   <div class="card">
-    <span class="tape">for later</span>
-
     <form id="noteForm">
       <input type="hidden" name="access_key" value="e8de582f-62aa-45c2-b3e8-5da425e961a8">
-      <input type="hidden" name="subject" value="A new note for Noor">
+      <input type="hidden" name="subject" value="Note for Noor">
       <input type="hidden" name="from_name" value="Notes for Noor">
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
 
@@ -213,7 +199,7 @@
       <div class="field">
         <label for="message">Your note</label>
         <textarea id="message" name="message" required
-          placeholder="A wish, a memory, some advice for later..."></textarea>
+          placeholder="A hope, a memory, some advice for later..."></textarea>
       </div>
 
       <button type="submit">Send your note</button>
@@ -229,7 +215,7 @@
     </div>
   </div>
 
-  <footer>Kept for Noor, with love.</footer>
+  <footer>Saved for Noor, with love.</footer>
 </main>
 
 <script>
@@ -242,11 +228,14 @@ form.addEventListener('submit', async (e) => {
   btn.disabled = true;
   status.textContent = 'Sending...';
 
+  const payload = Object.fromEntries(new FormData(form));
+  payload.subject = `Note from ${payload.name}`;
+
   try {
     const res = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      body: JSON.stringify(payload)
     });
     const data = await res.json();
 
