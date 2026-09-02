@@ -15,7 +15,6 @@
     --rose:#E56D8E;
     --deep:#4E2C3C;
     --cream:#FFFDFC;
-    --butter:#FFE6A8;
   }
   *{box-sizing:border-box}
 
@@ -46,19 +45,10 @@
     aspect-ratio:1;
     animation:bob 6s ease-in-out infinite;
   }
-  .photo img{
-    width:100%;height:100%;
-    object-fit:cover;
-    display:block;
-    clip-path:url(#flower);
-  }
-  .photo::before{                 /* petal edge behind the flower */
-    content:"";
-    position:absolute;
-    inset:-7px;
-    background:var(--petal);
-    clip-path:url(#flower);
-    z-index:-1;
+  .photo img{width:100%;height:100%;object-fit:cover;display:block;clip-path:url(#flower)}
+  .photo::before{
+    content:"";position:absolute;inset:-7px;
+    background:var(--petal);clip-path:url(#flower);z-index:-1;
   }
   @keyframes bob{50%{transform:translateY(-9px) rotate(1.5deg)}}
 
@@ -66,21 +56,16 @@
     font-family:"Baloo 2",system-ui,sans-serif;
     font-weight:700;
     font-size:clamp(2.5rem,11vw,3.8rem);
-    line-height:1;
-    letter-spacing:-.5px;
-    margin:0 0 .5rem;
-    color:var(--rose);
+    line-height:1;letter-spacing:-.5px;
+    margin:0 0 .5rem;color:var(--rose);
   }
   .hero p{margin:0 auto 2.25rem;max-width:25rem}
 
-  /* floating doodles */
   .doodle{position:absolute;pointer-events:none;opacity:.85}
   .d1{top:6%;left:-4%;width:34px;animation:drift 7s ease-in-out infinite}
   .d2{top:26%;right:-3%;width:26px;animation:drift 9s ease-in-out infinite reverse}
   .d3{top:2%;right:16%;width:20px;animation:drift 8s ease-in-out infinite .8s}
   @keyframes drift{50%{transform:translateY(-12px) rotate(-10deg)}}
-
-
 
   /* ---------- age ribbon ---------- */
   .clock{
@@ -98,10 +83,9 @@
 
   /* ---------- note card ---------- */
   .card{
-    position:relative;
     background:var(--cream);
     border:2px solid var(--petal);
-    border-radius:38px 38px 38px 10px;   /* speech bubble */
+    border-radius:38px 38px 38px 10px;
     padding:2rem 1.6rem 1.7rem;
     box-shadow:0 14px 34px rgba(229,109,142,.16);
   }
@@ -110,8 +94,7 @@
   .opt{font-weight:400;opacity:.6}
   .field{margin-bottom:1.15rem}
   input,textarea{
-    width:100%;
-    font:inherit;color:inherit;
+    width:100%;font:inherit;color:inherit;
     padding:.75rem .9rem;
     background:var(--blush);
     border:2px solid transparent;
@@ -121,67 +104,26 @@
   input::placeholder,textarea::placeholder{color:#B7909E}
   input:hover,textarea:hover{border-color:var(--petal)}
   textarea{min-height:8rem;resize:vertical;line-height:1.65}
-  input:focus,textarea:focus,button:focus-visible{
+  input:focus,textarea:focus,button:focus-visible,a:focus-visible{
     outline:3px solid var(--rose);outline-offset:2px;border-color:transparent;
   }
   .hp{position:absolute;left:-9999px}
 
-  button{
+  .send{
     width:100%;
     font-family:"Baloo 2",sans-serif;
     font-size:1.15rem;font-weight:700;
-    color:var(--cream);
-    background:var(--rose);
+    color:var(--cream);background:var(--rose);
     border:none;border-radius:999px;
-    padding:.75rem;
-    cursor:pointer;
+    padding:.75rem;cursor:pointer;
     box-shadow:0 5px 0 #C9587A;
     transition:transform .1s,box-shadow .1s;
   }
-  button:hover{transform:translateY(2px);box-shadow:0 3px 0 #C9587A}
-  button:active{transform:translateY(5px);box-shadow:0 0 0 #C9587A}
-  button[disabled]{opacity:.65;cursor:wait;transform:none;box-shadow:0 5px 0 #C9587A}
+  .send:hover{transform:translateY(2px);box-shadow:0 3px 0 #C9587A}
+  .send:active{transform:translateY(5px);box-shadow:0 0 0 #C9587A}
+  .send[disabled]{opacity:.65;cursor:wait;transform:none;box-shadow:0 5px 0 #C9587A}
 
-  /* share-a-moment card */
-  .share{
-    text-align:center;
-    border-radius:38px 10px 38px 38px;   /* mirrored bubble */
-  }
-  .share h2{
-    font-family:"Baloo 2",sans-serif;
-    font-size:1.45rem;font-weight:700;
-    color:var(--rose);
-    margin:0 0 .4rem;
-  }
-  .share p{margin:0 auto 1.25rem;max-width:24rem;font-size:.96rem}
-
-  /* or divider between the two cards */
-  .or{
-    display:flex;align-items:center;gap:.9rem;
-    margin:1.5rem 0;
-    font-family:"Baloo 2",sans-serif;
-    font-size:1rem;
-    color:var(--rose);
-    opacity:.8;
-  }
-  .or::before,.or::after{content:"";flex:1;border-top:2px dashed var(--petal)}
-  .mailbtn{
-    display:inline-flex;align-items:center;gap:.5rem;
-    font-family:"Baloo 2",sans-serif;
-    font-size:1rem;font-weight:500;
-    color:var(--rose);
-    text-decoration:none;
-    background:var(--cream);
-    border:2px solid var(--petal);
-    border-radius:999px;
-    padding:.5rem 1.2rem;
-    transition:background .15s,border-color .15s;
-  }
-  .mailbtn:hover{background:var(--blush);border-color:var(--rose)}
-  .mailbtn:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
-  .mailbtn svg{width:19px;height:19px;flex:none}
-
-  #status{margin:.9rem 0 0;font-size:.95rem;min-height:1.4rem;text-align:center}
+  #status{margin:.9rem 0 0;font-size:.9rem;min-height:1.3rem;text-align:center}
 
   .thanks{text-align:center;padding:1.5rem .5rem}
   .thanks svg{width:54px;margin-bottom:.4rem}
@@ -189,27 +131,45 @@
   .thanks p{margin:0}
   [hidden]{display:none}
 
-  footer{text-align:center;font-size:.85rem;opacity:.65;margin-top:2rem}
-
-  @media (prefers-reduced-motion:reduce){
-    *{animation:none!important;transition:none!important}
+  /* ---------- direct email ---------- */
+  .direct{text-align:center;margin-top:2rem}
+  .direct-title{
+    font-family:"Baloo 2",sans-serif;
+    font-size:.95rem;color:var(--rose);
+    margin:0 0 .7rem;opacity:.85;
   }
+  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
+  .mailbtn{
+    display:inline-flex;align-items:center;gap:.45rem;
+    font-family:"Baloo 2",sans-serif;
+    font-size:.92rem;font-weight:500;
+    color:var(--rose);text-decoration:none;
+    background:none;cursor:pointer;
+    border:2px solid var(--petal);
+    border-radius:999px;
+    padding:.42rem 1rem;
+    transition:background .15s,border-color .15s;
+  }
+  .mailbtn:hover{background:var(--cream);border-color:var(--rose)}
+  .mailbtn svg{width:17px;height:17px;flex:none}
+  .sig{font-size:.85rem;opacity:.6;margin:1.6rem 0 0;text-align:center}
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<!-- flower mask used by the photo -->
 <svg width="0" height="0" aria-hidden="true">
   <defs>
     <clipPath id="flower" clipPathUnits="objectBoundingBox">
-      <circle cx=".5"   cy=".5"   r=".34"/>
-      <circle cx=".81"  cy=".5"   r=".19"/>
+      <circle cx=".5" cy=".5" r=".34"/>
+      <circle cx=".81" cy=".5" r=".19"/>
       <circle cx=".719" cy=".719" r=".19"/>
-      <circle cx=".5"   cy=".81"  r=".19"/>
+      <circle cx=".5" cy=".81" r=".19"/>
       <circle cx=".281" cy=".719" r=".19"/>
-      <circle cx=".19"  cy=".5"   r=".19"/>
+      <circle cx=".19" cy=".5" r=".19"/>
       <circle cx=".281" cy=".281" r=".19"/>
-      <circle cx=".5"   cy=".19"  r=".19"/>
+      <circle cx=".5" cy=".19" r=".19"/>
       <circle cx=".719" cy=".281" r=".19"/>
     </clipPath>
   </defs>
@@ -228,12 +188,9 @@
   </svg>
 
   <section class="hero">
-    <div class="photo">
-      <img src="image.jpg" alt="Noor as a baby">
-    </div>
+    <div class="photo"><img src="image.jpg" alt="Noor as a baby"></div>
     <h1>Notes for Noor</h1>
-    <p>She is too little to read these yet. Leave one anyway — she will have them all one day.</p>
-
+    <p>She is too little to read these yet. Leave one anyway &mdash; she will have them all one day.</p>
     <p class="clock">
       <span id="age"></span>
       <span class="dot">&hearts;</span>
@@ -264,7 +221,7 @@
           placeholder="A hope, a memory, some advice for later..."></textarea>
       </div>
 
-      <button type="submit">Send your note</button>
+      <button type="submit" class="send">Send your note</button>
       <p id="status" role="status"></p>
     </form>
 
@@ -275,37 +232,49 @@
       <h2>Tucked away safely</h2>
       <p>Thank you for writing to her.</p>
     </div>
-
   </div>
 
-
-  <p class="or">or</p>
-
-  <div class="card share">
-    <h2>Share a moment</h2>
-    <p>Photos, videos, a voice message, a story about the day you met her &mdash; anything you would like her to keep.</p>
-    <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
+  <section class="direct">
+    <p class="direct-title">Sending photos? Email her directly</p>
+    <div class="btnrow">
+      <a class="mailbtn" target="_blank" rel="noopener"
+         href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=9oorwh@gmail.com&amp;su=Note%20for%20Noor">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <rect x="2" y="4.5" width="20" height="15" rx="3"/>
           <path d="M2.8 6.2 12 13l9.2-6.8"/>
         </svg>
-        Send a direct email
+        Open in Gmail
       </a>
-  </div>
 
+      <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16v16H4z"/><path d="M4 8h16"/>
+        </svg>
+        Mail app
+      </a>
 
-  <footer>Saved for Noor, with love.</footer>
+      <button class="mailbtn" id="copybtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="9" y="9" width="12" height="12" rx="2"/>
+          <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
+        </svg>
+        <span id="copytext">Copy address</span>
+      </button>
+    </div>
+    <p class="sig">Saved for Noor, with love.</p>
+  </section>
 </main>
 
 <script>
 /* ---- how long Noor has been here ---- */
 (function () {
-  const BORN = new Date(2026, 4, 20);          // 20 May 2026
+  const BORN = new Date(2026, 4, 20);            // 20 May 2026
   const today = new Date(); today.setHours(0,0,0,0);
   const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
 
-  // years / months / days lived
   let y = today.getFullYear() - BORN.getFullYear();
   let m = today.getMonth() - BORN.getMonth();
   let d = today.getDate() - BORN.getDate();
@@ -320,52 +289,66 @@
     ? parts.slice(0, -1).join(', ') + ' and ' + parts.at(-1)
     : parts[0];
 
-  // next birthday
   let next = new Date(today.getFullYear(), 4, 20);
   if (next < today) next = new Date(today.getFullYear() + 1, 4, 20);
-  const sleeps = Math.round((next - today) / 86400000);
+  const days = Math.round((next - today) / 86400000);
   const turning = next.getFullYear() - BORN.getFullYear();
   const ord = n => n + (['th','st','nd','rd'][(n % 100 - 20) % 10] || ['th','st','nd','rd'][n % 100] || 'th');
 
   document.getElementById('age').innerHTML = `<b>${lived}</b> in the world`;
   document.getElementById('bday').innerHTML =
-    sleeps !== 0 ? `<b>${plural(sleeps, 'day')}</b> to her ${ord(turning)} birthday`
+    days !== 0 ? `<b>${plural(days, 'day')}</b> to her ${ord(turning)} birthday`
     : turning === 0 ? `she arrived <b>today</b>`
     : `it is her <b>${ord(turning)} birthday</b> today`;
 })();
 
-const form   = document.getElementById('noteForm');
-const status = document.getElementById('status');
-const btn    = form.querySelector('button');
+/* ---- send the note ---- */
+(function () {
+  const form   = document.getElementById('noteForm');
+  const status = document.getElementById('status');
+  const btn    = form.querySelector('.send');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  btn.disabled = true;
-  status.textContent = 'Sending...';
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    btn.disabled = true;
+    status.textContent = 'Sending...';
 
-  const payload = Object.fromEntries(new FormData(form));
-  payload.subject = `Note from ${payload.name}`;
-  if (!payload.email) delete payload.email;
+    const payload = Object.fromEntries(new FormData(form));
+    payload.subject = `Note from ${payload.name}`;
+    if (!payload.email) delete payload.email;
 
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
 
-    if (data.success) {
-      form.hidden = true;
-      document.getElementById('thanks').hidden = false;
-    } else {
-      status.textContent = 'That did not send. Please try again.';
+      if (data.success) {
+        form.hidden = true;
+        document.getElementById('thanks').hidden = false;
+      } else {
+        status.textContent = 'That did not send. Please try again.';
+        btn.disabled = false;
+      }
+    } catch {
+      status.textContent = 'No connection. Check your internet and try again.';
       btn.disabled = false;
     }
+  });
+})();
+
+/* ---- copy her address ---- */
+document.getElementById('copybtn').addEventListener('click', async function () {
+  const label = document.getElementById('copytext');
+  try {
+    await navigator.clipboard.writeText('9oorwh@gmail.com');
+    label.textContent = 'Copied!';
   } catch {
-    status.textContent = 'No connection. Check your internet and try again.';
-    btn.disabled = false;
+    label.textContent = '9oorwh@gmail.com';
   }
+  setTimeout(() => { label.textContent = 'Copy address'; }, 2500);
 });
 </script>
 </body>
