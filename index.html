@@ -138,7 +138,6 @@
     font-size:.95rem;color:var(--rose);
     margin:0 0 .7rem;opacity:.85;
   }
-  .btnrow{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem}
   .mailbtn{
     display:inline-flex;align-items:center;gap:.45rem;
     font-family:"Baloo 2",sans-serif;
@@ -152,6 +151,7 @@
   }
   .mailbtn:hover{background:var(--cream);border-color:var(--rose)}
   .mailbtn svg{width:17px;height:17px;flex:none}
+  .mailbtn{font-size:.95rem;padding:.45rem 1.1rem}
   .sig{font-size:.85rem;opacity:.6;margin:1.6rem 0 0;text-align:center}
 
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -236,34 +236,14 @@
 
   <section class="direct">
     <p class="direct-title">Sending photos? Email her directly</p>
-    <div class="btnrow">
-      <a class="mailbtn" target="_blank" rel="noopener"
-         href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=9oorwh@gmail.com&amp;su=Note%20for%20Noor">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2" y="4.5" width="20" height="15" rx="3"/>
-          <path d="M2.8 6.2 12 13l9.2-6.8"/>
-        </svg>
-        Open in Gmail
-      </a>
-
-      <a class="mailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M4 4h16v16H4z"/><path d="M4 8h16"/>
-        </svg>
-        Mail app
-      </a>
-
-      <button class="mailbtn" id="copybtn" type="button">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="9" y="9" width="12" height="12" rx="2"/>
-          <path d="M5 15V5a2 2 0 0 1 2-2h10"/>
-        </svg>
-        <span id="copytext">Copy address</span>
-      </button>
-    </div>
+    <a class="mailbtn" id="emailbtn" href="mailto:9oorwh@gmail.com?subject=Note%20for%20Noor">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2" y="4.5" width="20" height="15" rx="3"/>
+        <path d="M2.8 6.2 12 13l9.2-6.8"/>
+      </svg>
+      Send a direct email
+    </a>
     <p class="sig">Saved for Noor, with love.</p>
   </section>
 </main>
@@ -339,17 +319,16 @@
   });
 })();
 
-/* ---- copy her address ---- */
-document.getElementById('copybtn').addEventListener('click', async function () {
-  const label = document.getElementById('copytext');
-  try {
-    await navigator.clipboard.writeText('9oorwh@gmail.com');
-    label.textContent = 'Copied!';
-  } catch {
-    label.textContent = '9oorwh@gmail.com';
-  }
-  setTimeout(() => { label.textContent = 'Copy address'; }, 2500);
-});
+/* ---- pick the right mail destination ---- */
+(function () {
+  const btn = document.getElementById('emailbtn');
+  const onPhone = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (onPhone) return;                       // mailto: is right on a phone
+  btn.href = 'https://mail.google.com/mail/?view=cm&fs=1'
+           + '&to=9oorwh@gmail.com&su=' + encodeURIComponent('Note for Noor');
+  btn.target = '_blank';
+  btn.rel = 'noopener';
+})();
 </script>
 </body>
 </html>
